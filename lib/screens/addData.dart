@@ -4,6 +4,7 @@ import 'package:teckweek/screens/addbudget.dart';
 import '../widgets/coolButtion.dart';
 import 'AddNessitys.dart';
 import 'AddSpending.dart';
+import 'addFunSpending.dart';
 
 class AddData extends StatefulWidget {
   const AddData({
@@ -85,7 +86,7 @@ class _AddData extends State<AddData> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Addnecessity()),
+                  MaterialPageRoute(builder: (context) => const AddWaste()),
                 );
               },
               width: 200,
