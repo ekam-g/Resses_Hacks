@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:teckweek/screens/addbudget.dart';
+
+import '../widgets/coolButtion.dart';
 
 class AddData extends StatefulWidget {
-  const AddData({Key? key,}) : super(key: key);
-
+  const AddData({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<AddData> createState() => _AddData();
@@ -19,32 +23,33 @@ class _AddData extends State<AddData> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-
         title: const Text("Add Data"),
+        backgroundColor: Colors.greenAccent,
+        foregroundColor: Colors.white,
       ),
       body: Center(
-
         child: Column(
-
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            const Spacer(),
+            ExpandedButton(
+              fontSize: 15,
+              text: 'Add Budget For Month',
+              flex: 2,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const addBudget()),
+                );
+              },
+              width: 200,
+              color: Colors.greenAccent,
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            const Spacer(),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
