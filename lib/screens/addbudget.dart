@@ -20,6 +20,9 @@ class _addBudget extends State<addBudget> {
   getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     Income = prefs.getInt('Income') ?? 0;
+    if (Income < 0) {
+      Income = 0;
+    }
     setState(() {});
   }
 
@@ -78,7 +81,7 @@ class _addBudget extends State<addBudget> {
                   ExpandedButtonRow(
                     flex: 3,
                     text: 'Add',
-                    fontSize: 20,
+                    fontSize: 15,
                     height: 70,
                     onPressed: () async {
                       final prefs = await SharedPreferences.getInstance();
@@ -91,11 +94,24 @@ class _addBudget extends State<addBudget> {
                   ExpandedButtonRow(
                     flex: 3,
                     text: 'Subtract',
-                    fontSize: 12,
+                    fontSize: 7,
                     height: 70,
                     onPressed: () async {
                       final prefs = await SharedPreferences.getInstance();
                       int newData = Income - int.parse(incomeController.text);
+                      prefs.setInt('Income', newData);
+                      getData();
+                    },
+                  ),
+                  const Spacer(),
+                  ExpandedButtonRow(
+                    flex: 3,
+                    text: 'Reset',
+                    fontSize: 9,
+                    height: 70,
+                    onPressed: () async {
+                      final prefs = await SharedPreferences.getInstance();
+                      int newData = 0;
                       prefs.setInt('Income', newData);
                       getData();
                     },
@@ -105,7 +121,7 @@ class _addBudget extends State<addBudget> {
                   ),
                 ],
               ),
-              const Spacer(flex: 10,)
+              const Spacer(flex: 4)
             ],
           ),
         ),
