@@ -1,50 +1,56 @@
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key,}) : super(key: key);
-
+  const MyHomePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      appBar: AppBar(
-
-        title: const Text("Budget Buddy"),
-      ),
       body: Center(
-
         child: Column(
-
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            const Spacer(
+              flex: 5,
+            ),
             const Text(
-              'You have pushed the button this many times:',
+              'Welcome to Budget Buddy',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            CircleAvatar(
+              radius: 100,
+              backgroundColor: Colors.green,
+              child: Padding(
+                padding: const EdgeInsets.all(8), // Border radius
+                child: ClipOval(
+                  child: Image.asset(
+                    "assets/icon.png",
+                  ),
+                ),
+              ),
             ),
+            const Spacer(
+              flex: 8,
+            ),
+            const Text(
+              "click the button below to get started.\n"
+              "make sure to add data before you start using the app",
+              textAlign: TextAlign.center,
+            ),
+            const Spacer(),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
