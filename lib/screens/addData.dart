@@ -48,6 +48,34 @@ class _AddData extends State<AddData> {
               color: Colors.greenAccent,
             ),
             const Spacer(),
+            ExpandedButton(
+              fontSize: 15,
+              text: 'Add Spending',
+              flex: 2,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const addBudget()),
+                );
+              },
+              width: 200,
+              color: Colors.greenAccent,
+            ),
+            const Spacer(),
+            ExpandedButton(
+              fontSize: 15,
+              text: 'Add Bills',
+              flex: 2,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const addBudget()),
+                );
+              },
+              width: 200,
+              color: Colors.greenAccent,
+            ),
+            const Spacer(),
           ],
         ),
       ),

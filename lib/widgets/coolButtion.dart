@@ -22,6 +22,7 @@ class SizedButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
+          animationDuration: const Duration(seconds: 2),
           elevation: 20,
           primary: Colors.green,
           onPrimary: Colors.green,
@@ -70,6 +71,7 @@ class ExpandedButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
+            animationDuration: const Duration(seconds: 2),
             elevation: 20,
             primary: color,
             onPrimary: color,
@@ -119,6 +121,7 @@ class ExpandedButtonRow extends StatelessWidget {
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
+            animationDuration: const Duration(seconds: 2),
             elevation: 20,
             primary: Colors.green,
             onPrimary: Colors.green,
