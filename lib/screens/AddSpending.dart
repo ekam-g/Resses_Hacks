@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../widgets/DropDownMenu.dart';
 import '../widgets/coolButtion.dart';
 
 class AddSpending extends StatefulWidget {
@@ -21,6 +23,8 @@ class _AddSpending extends State<AddSpending> {
   int GasBillHome = -1;
   int RepairsHome = -1;
   int TaxesHome = -1;
+  String dropdownValue = 'Home Bills';
+
   getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     HomeBills = prefs.getInt('HomeBills') ?? 0;
@@ -73,7 +77,7 @@ class _AddSpending extends State<AddSpending> {
     } else {
       return Scaffold(
         appBar: AppBar(
-          title: const Text("Add Income"),
+          title: const Text("Add Home Spending"),
         ),
         body: Center(
           child: Column(
@@ -129,50 +133,165 @@ class _AddSpending extends State<AddSpending> {
               const Spacer(
                 flex: 2,
               ),
+              DropdownButton<String>(
+                value: dropdownValue,
+                icon: const Icon(Icons.arrow_downward),
+                elevation: 16,
+                style: const TextStyle(color: Colors.deepPurple),
+                underline: Container(
+                  height: 2,
+                  color: Colors.deepPurpleAccent,
+                ),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    dropdownValue = newValue!;
+                  });
+                },
+                items: <String>[
+                  'Home Bills',
+                  'Sanitary Items',
+                  'Gas Bill Home',
+                  'Electrical Bill',
+                  'Taxes Home',
+                  'Repairs Home'
+                ].map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   const Spacer(
                     flex: 2,
                   ),
-                  // ExpandedButtonRow(
-                  //   flex: 3,
-                  //   text: 'Add',
-                  //   fontSize: 15,
-                  //   height: 70,
-                  //   onPressed: () async {
-                  //     final prefs = await SharedPreferences.getInstance();
-                  //     int newData = int.parse(incomeController.text) + Income;
-                  //     prefs.setInt('Income', newData);
-                  //     getData();
-                  //   },
-                  // ),
-                  // const Spacer(),
-                  // ExpandedButtonRow(
-                  //   flex: 3,
-                  //   text: 'Subtract',
-                  //   fontSize: 7,
-                  //   height: 70,
-                  //   onPressed: () async {
-                  //     final prefs = await SharedPreferences.getInstance();
-                  //     int newData = Income - int.parse(incomeController.text);
-                  //     prefs.setInt('Income', newData);
-                  //     getData();
-                  //   },
-                  // ),
-                  // const Spacer(),
-                  // ExpandedButtonRow(
-                  //   flex: 3,
-                  //   text: 'Reset',
-                  //   fontSize: 9,
-                  //   height: 70,
-                  //   onPressed: () async {
-                  //     final prefs = await SharedPreferences.getInstance();
-                  //     int newData = 0;
-                  //     prefs.setInt('Income', newData);
-                  //     getData();
-                  //   },
-                  // ),
+                  ExpandedButtonRow(
+                    flex: 3,
+                    text: 'Add',
+                    fontSize: 15,
+                    height: 70,
+                    onPressed: () async {
+                      final prefs = await SharedPreferences.getInstance();
+                      if (dropdownValue == 'Home Bills') {
+                        int newData =
+                            int.parse(incomeController.text) + HomeBills;
+                        prefs.setInt('HomeBills', newData);
+                        getData();
+                      }
+                      if (dropdownValue == 'Sanitary Items') {
+                        int newData =
+                            int.parse(incomeController.text) + SanitaryItems;
+                        prefs.setInt('SanitaryItems', newData);
+                        getData();
+                      }
+                      if (dropdownValue == 'Electrical Bill') {
+                        int newData =
+                            int.parse(incomeController.text) + ElecticalBill;
+                        prefs.setInt('ElecticalBill', newData);
+                        getData();
+                      }
+                      if (dropdownValue == 'Gas Bill Home') {
+                        int newData =
+                            int.parse(incomeController.text) + GasBillHome;
+                        prefs.setInt('GasBillHome', newData);
+                        getData();
+                      }
+                      if (dropdownValue == 'Repairs Home') {
+                        int newData =
+                            int.parse(incomeController.text) + RepairsHome;
+                        prefs.setInt('RepairsHome', newData);
+                        getData();
+                      }
+                      if (dropdownValue == 'Taxes Home') {
+                        int newData =
+                            int.parse(incomeController.text) + TaxesHome;
+                        prefs.setInt('TaxesHome', newData);
+                        getData();
+                      }
+                    },
+                  ),
+                  const Spacer(),
+                  ExpandedButtonRow(
+                    flex: 3,
+                    text: 'Subtract',
+                    fontSize: 7,
+                    height: 70,
+                    onPressed: () async {
+                      final prefs = await SharedPreferences.getInstance();
+                      if (dropdownValue == 'Home Bills') {
+                        int newData =
+                            HomeBills - int.parse(incomeController.text);
+                        prefs.setInt('HomeBills', newData);
+                        getData();
+                      }
+                      if (dropdownValue == 'Sanitary Items') {
+                        int newData =
+                            SanitaryItems - int.parse(incomeController.text);
+                        prefs.setInt('SanitaryItems', newData);
+                        getData();
+                      }
+                      if (dropdownValue == 'Electrical Bill') {
+                        int newData =
+                            ElecticalBill - int.parse(incomeController.text);
+                        prefs.setInt('ElecticalBill', newData);
+                        getData();
+                      }
+                      if (dropdownValue == 'Gas Bill Home') {
+                        int newData =
+                            GasBillHome - int.parse(incomeController.text);
+                        prefs.setInt('GasBillHome', newData);
+                        getData();
+                      }
+                      if (dropdownValue == 'Repairs Home') {
+                        int newData =
+                            RepairsHome - int.parse(incomeController.text);
+                        prefs.setInt('RepairsHome', newData);
+                        getData();
+                      }
+                      if (dropdownValue == 'Taxes Home') {
+                        int newData =
+                            TaxesHome - int.parse(incomeController.text);
+                        prefs.setInt('TaxesHome', newData);
+                        getData();
+                      }
+                    },
+                  ),
+                  const Spacer(),
+                  ExpandedButtonRow(
+                    flex: 3,
+                    text: 'Reset',
+                    fontSize: 9,
+                    height: 70,
+                    onPressed: () async {
+                      final prefs = await SharedPreferences.getInstance();
+                      if (dropdownValue == 'Home Bills') {
+                        prefs.setInt('HomeBills', 0);
+                        getData();
+                      }
+                      if (dropdownValue == 'Sanitary Items') {
+                        prefs.setInt('SanitaryItems', 0);
+                        getData();
+                      }
+                      if (dropdownValue == 'Electrical Bill') {
+                        prefs.setInt('ElectricalBill', 0);
+                        getData();
+                      }
+                      if (dropdownValue == 'Gas Bill Home') {
+                        prefs.setInt('GasBillHome', 0);
+                        getData();
+                      }
+                      if (dropdownValue == 'Repairs Home') {
+                        prefs.setInt('RepairsHome', 0);
+                        getData();
+                      }
+                      if (dropdownValue == 'Taxes Home') {
+                        prefs.setInt('TaxesHome', 0);
+                        getData();
+                      }
+                    },
+                  ),
                   const Spacer(
                     flex: 2,
                   ),
