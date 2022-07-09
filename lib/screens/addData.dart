@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:teckweek/screens/addbudget.dart';
 
 import '../widgets/coolButtion.dart';
+import 'AddSpending.dart';
 
 class AddData extends StatefulWidget {
   const AddData({
@@ -50,12 +51,12 @@ class _AddData extends State<AddData> {
             const Spacer(),
             ExpandedButton(
               fontSize: 15,
-              text: 'Add Spending',
+              text: 'Add Home Spending',
               flex: 2,
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const addBudget()),
+                  MaterialPageRoute(builder: (context) => const AddSpending()),
                 );
               },
               width: 200,
