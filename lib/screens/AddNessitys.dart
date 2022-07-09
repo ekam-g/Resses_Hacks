@@ -1,55 +1,52 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../widgets/DropDownMenu.dart';
 import '../widgets/coolButtion.dart';
 
-class AddSpending extends StatefulWidget {
-  const AddSpending({
+class Addnecessity extends StatefulWidget {
+  const Addnecessity({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<AddSpending> createState() => _AddSpending();
+  State<Addnecessity> createState() => _Addnecessity();
 }
 
-class _AddSpending extends State<AddSpending> {
+class _Addnecessity extends State<Addnecessity> {
   late TextEditingController incomeController;
 
-  int HomeBills = -1;
-  int SanitaryItems = -1;
-  int ElecticalBill = -1;
-  int GasBillHome = -1;
-  int RepairsHome = -1;
-  int TaxesHome = -1;
-  String dropdownValue = 'Home Bills';
-
+  int Food = -1;
+  int Health = -1;
+  int Car = -1;
+  int Cloths = -1;
+  int Taxes = -1;
+  int Interest = -1;
+  String dropdownValue = 'Food';
   getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    HomeBills = prefs.getInt('HomeBills') ?? 0;
-    if (HomeBills < 0) {
-      HomeBills = 0;
+    Food = prefs.getInt('Food') ?? 0;
+    if (Food < 0) {
+      Food = 0;
     }
-    SanitaryItems = prefs.getInt('SanitaryItems') ?? 0;
-    if (SanitaryItems < 0) {
-      SanitaryItems = 0;
+    Health = prefs.getInt('Health') ?? 0;
+    if (Health < 0) {
+      Health = 0;
     }
-    ElecticalBill = prefs.getInt('ElecticalBill') ?? 0;
-    if (ElecticalBill < 0) {
-      ElecticalBill = 0;
+    Car = prefs.getInt('Car') ?? 0;
+    if (Car < 0) {
+      Car = 0;
     }
-    GasBillHome = prefs.getInt('GasBillHome') ?? 0;
-    if (GasBillHome < 0) {
-      GasBillHome = 0;
+    Cloths = prefs.getInt('Cloths') ?? 0;
+    if (Cloths < 0) {
+      Cloths = 0;
     }
-    RepairsHome = prefs.getInt('RepairsHome') ?? 0;
-    if (RepairsHome < 0) {
-      RepairsHome = 0;
+    Taxes = prefs.getInt('Taxes') ?? 0;
+    if (Taxes < 0) {
+      Taxes = 0;
     }
-    TaxesHome = prefs.getInt('TaxesHome') ?? 0;
-    if (TaxesHome < 0) {
-      TaxesHome = 0;
+    Interest = prefs.getInt('Interest') ?? 0;
+    if (Interest < 0) {
+      Interest = 0;
     }
     setState(() {});
   }
@@ -69,7 +66,7 @@ class _AddSpending extends State<AddSpending> {
 
   @override
   Widget build(BuildContext context) {
-    if (TaxesHome == -1) {
+    if (Interest == -1) {
       return Container(
           color: Colors.white,
           child: const SizedBox(
@@ -87,37 +84,37 @@ class _AddSpending extends State<AddSpending> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'Current Home Bills is set to:  $HomeBills Dollars',
+                  'Current food cost is set to:  $Food Dollars',
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'Current Sanitary Items is set to:  $SanitaryItems Dollars',
+                  'Current Health cost is set to:  $Health Dollars',
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'Current Electical Bill is set to:  $ElecticalBill Dollars',
+                  'Current Car Bill is set to:  $Car Dollars',
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'Current Gas Bill Home is set to:  $GasBillHome Dollars',
+                  'Current Cloths cost is set to:  $Cloths Dollars',
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'Current Repairs Home is set to:  $RepairsHome Dollars',
+                  'Current Taxes is set to:  $Taxes Dollars',
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'Current Taxes Home is set to:  $TaxesHome Dollars',
+                  'Current Taxes Home is set to:  $Interest Dollars',
                 ),
               ),
               Padding(
@@ -148,12 +145,12 @@ class _AddSpending extends State<AddSpending> {
                   });
                 },
                 items: <String>[
-                  'Home Bills',
-                  'Sanitary Items',
-                  'Gas Bill Home',
-                  'Electrical Bill',
-                  'Taxes Home',
-                  'Repairs Home'
+                  'Food',
+                  'Health',
+                  'Car',
+                  'Cloths',
+                  'Taxes',
+                  'Interest',
                 ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
@@ -174,40 +171,40 @@ class _AddSpending extends State<AddSpending> {
                     height: 70,
                     onPressed: () async {
                       final prefs = await SharedPreferences.getInstance();
-                      if (dropdownValue == 'Home Bills') {
+                      if (dropdownValue == 'Food') {
                         int newData =
-                            int.parse(incomeController.text) + HomeBills;
-                        prefs.setInt('HomeBills', newData);
+                            int.parse(incomeController.text) + Food;
+                        prefs.setInt('Food', newData);
                         getData();
                       }
-                      if (dropdownValue == 'Sanitary Items') {
+                      if (dropdownValue == 'Health') {
                         int newData =
-                            int.parse(incomeController.text) + SanitaryItems;
-                        prefs.setInt('SanitaryItems', newData);
+                            int.parse(incomeController.text) + Health;
+                        prefs.setInt('Health', newData);
                         getData();
                       }
-                      if (dropdownValue == 'Electrical Bill') {
+                      if (dropdownValue == 'Car') {
                         int newData =
-                            int.parse(incomeController.text) + ElecticalBill;
-                        prefs.setInt('ElecticalBill', newData);
+                            int.parse(incomeController.text) + Car;
+                        prefs.setInt('Car', newData);
                         getData();
                       }
-                      if (dropdownValue == 'Gas Bill Home') {
+                      if (dropdownValue == 'Cloths') {
                         int newData =
-                            int.parse(incomeController.text) + GasBillHome;
-                        prefs.setInt('GasBillHome', newData);
+                            int.parse(incomeController.text) + Cloths;
+                        prefs.setInt('Cloths', newData);
                         getData();
                       }
-                      if (dropdownValue == 'Repairs Home') {
+                      if (dropdownValue == 'Taxes') {
                         int newData =
-                            int.parse(incomeController.text) + RepairsHome;
-                        prefs.setInt('RepairsHome', newData);
+                            int.parse(incomeController.text) + Taxes;
+                        prefs.setInt('Taxes', newData);
                         getData();
                       }
-                      if (dropdownValue == 'Taxes Home') {
+                      if (dropdownValue == 'Interest') {
                         int newData =
-                            int.parse(incomeController.text) + TaxesHome;
-                        prefs.setInt('TaxesHome', newData);
+                            int.parse(incomeController.text) + Interest;
+                        prefs.setInt('Interest', newData);
                         getData();
                       }
                     },
@@ -220,40 +217,40 @@ class _AddSpending extends State<AddSpending> {
                     height: 70,
                     onPressed: () async {
                       final prefs = await SharedPreferences.getInstance();
-                      if (dropdownValue == 'Home Bills') {
+                      if (dropdownValue == 'Food') {
                         int newData =
-                            HomeBills - int.parse(incomeController.text);
-                        prefs.setInt('HomeBills', newData);
+                            Food - int.parse(incomeController.text);
+                        prefs.setInt('Food', newData);
                         getData();
                       }
-                      if (dropdownValue == 'Sanitary Items') {
+                      if (dropdownValue == 'Health') {
                         int newData =
-                            SanitaryItems - int.parse(incomeController.text);
-                        prefs.setInt('SanitaryItems', newData);
+                            Health - int.parse(incomeController.text);
+                        prefs.setInt('Health', newData);
                         getData();
                       }
-                      if (dropdownValue == 'Electrical Bill') {
+                      if (dropdownValue == 'Car') {
                         int newData =
-                            ElecticalBill - int.parse(incomeController.text);
-                        prefs.setInt('ElecticalBill', newData);
+                            Car - int.parse(incomeController.text);
+                        prefs.setInt('Car', newData);
                         getData();
                       }
-                      if (dropdownValue == 'Gas Bill Home') {
+                      if (dropdownValue == 'Cloths') {
                         int newData =
-                            GasBillHome - int.parse(incomeController.text);
-                        prefs.setInt('GasBillHome', newData);
+                            Cloths - int.parse(incomeController.text);
+                        prefs.setInt('Cloths', newData);
                         getData();
                       }
-                      if (dropdownValue == 'Repairs Home') {
+                      if (dropdownValue == 'Taxes') {
                         int newData =
-                            RepairsHome - int.parse(incomeController.text);
-                        prefs.setInt('RepairsHome', newData);
+                            Taxes - int.parse(incomeController.text);
+                        prefs.setInt('Taxes', newData);
                         getData();
                       }
-                      if (dropdownValue == 'Taxes Home') {
+                      if (dropdownValue == 'Interest') {
                         int newData =
-                            TaxesHome - int.parse(incomeController.text);
-                        prefs.setInt('TaxesHome', newData);
+                            Interest - int.parse(incomeController.text);
+                        prefs.setInt('Interest', newData);
                         getData();
                       }
                     },
@@ -266,28 +263,28 @@ class _AddSpending extends State<AddSpending> {
                     height: 70,
                     onPressed: () async {
                       final prefs = await SharedPreferences.getInstance();
-                      if (dropdownValue == 'Home Bills') {
-                        prefs.setInt('HomeBills', 0);
+                      if (dropdownValue == 'Food') {
+                        prefs.setInt('Food', 0);
                         getData();
                       }
                       if (dropdownValue == 'Sanitary Items') {
                         prefs.setInt('SanitaryItems', 0);
                         getData();
                       }
-                      if (dropdownValue == 'Electrical Bill') {
-                        prefs.setInt('ElectricalBill', 0);
+                      if (dropdownValue == 'Health') {
+                        prefs.setInt('Health', 0);
                         getData();
                       }
-                      if (dropdownValue == 'Gas Bill Home') {
-                        prefs.setInt('GasBillHome', 0);
+                      if (dropdownValue == 'Car') {
+                        prefs.setInt('Car', 0);
                         getData();
                       }
-                      if (dropdownValue == 'Repairs Home') {
-                        prefs.setInt('RepairsHome', 0);
+                      if (dropdownValue == 'Taxes') {
+                        prefs.setInt('Taxes', 0);
                         getData();
                       }
-                      if (dropdownValue == 'Taxes Home') {
-                        prefs.setInt('TaxesHome', 0);
+                      if (dropdownValue == 'Interest') {
+                        prefs.setInt('Interest', 0);
                         getData();
                       }
                     },
