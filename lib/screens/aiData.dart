@@ -41,24 +41,24 @@ class _Ai extends State<Ai> {
   ///split
   int total = -1;
   List what = [
-  "eatingOut",
-  "tech",
-  "furniture",
-  "Other",
-  "cheapStuff",
-  "wearables",
-  "HomeBills",
-  "SanitaryItems",
-  "ElecticalBill",
-  "GasBillHome",
-  "RepairsHome",
-  "TaxesHome",
-  "Food",
-  "Health",
-  "Car",
-  "Cloths",
-  "Taxes",
-  "Interest"
+    "eatingOut",
+    "tech",
+    "furniture",
+    "Other",
+    "cheapStuff",
+    "wearables",
+    "HomeBills",
+    "SanitaryItems",
+    "ElecticalBill",
+    "GasBillHome",
+    "RepairsHome",
+    "TaxesHome",
+    "Food",
+    "Health",
+    "Car",
+    "Cloths",
+    "Taxes",
+    "Interest"
   ];
   List workOn = ['Loading...','Loading...','Loading...'];
   getData() async {
@@ -204,6 +204,8 @@ class _Ai extends State<Ai> {
       Interest
     ];
     find.sort();
+    find = find.reversed.toList();
+
     for (int i = 0; i < 3; i++) {
       for (int x = 0; x < what.length; x++) {
         int same = 0;
@@ -225,7 +227,7 @@ class _Ai extends State<Ai> {
 
   @override
   Widget build(BuildContext context) {
-    if (workOn[1] == "Loading...") {
+    if (workOn[0] == "Loading...") {
       return Center(
         child: Column(
           children:  [
@@ -258,7 +260,7 @@ class _Ai extends State<Ai> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Text(
-                "Ai thinks that you should work on: " + workOn[0] + ", " + workOn[1] + ", and " + workOn[2],
+                "Ai thinks that you should work on: " + workOn[0].toString() + ", " + workOn[1].toString() + ", and " + workOn[2].toString(),
                 style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
