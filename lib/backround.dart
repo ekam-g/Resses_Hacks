@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:teckweek/screens/DataSee.dart';
 import 'package:teckweek/screens/addData.dart';
+import 'package:teckweek/screens/aiData.dart';
 
 import 'screens/homepage.dart';
 
@@ -19,10 +20,7 @@ class _bottomNav extends State<bottomNav> {
     const MyHomePage(),
     const SeeData(),
     const AddData(),
-    const Text(
-      'Index 3: Settings',
-      style: optionStyle,
-    ),
+    const Ai(),
   ];
 
   void _onItemTapped(int index) {
@@ -55,8 +53,8 @@ class _bottomNav extends State<bottomNav> {
             backgroundColor: Colors.greenAccent,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+            icon: Icon(Icons.question_mark_sharp),
+            label: 'Ai Improvements',
             backgroundColor: Colors.lightGreenAccent,
           ),
         ],
