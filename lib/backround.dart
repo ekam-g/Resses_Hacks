@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teckweek/screens/DataSee.dart';
 import 'package:teckweek/screens/addData.dart';
 
 import 'screens/homepage.dart';
@@ -14,14 +15,11 @@ class _bottomNav extends State<bottomNav> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    MyHomePage(),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    AddData(),
-    Text(
+  static  final List<Widget> _widgetOptions = <Widget>[
+    const MyHomePage(),
+    const SeeData(),
+    const AddData(),
+    const Text(
       'Index 3: Settings',
       style: optionStyle,
     ),
@@ -47,8 +45,8 @@ class _bottomNav extends State<bottomNav> {
             backgroundColor: Colors.green,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: Icon(Icons.savings_outlined),
+            label: 'See Data',
             backgroundColor: Colors.lightGreen,
           ),
           BottomNavigationBarItem(

@@ -18,11 +18,7 @@ class AddData extends StatefulWidget {
 class _AddData extends State<AddData> {
   int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+
 
   @override
   Widget build(BuildContext context) {
