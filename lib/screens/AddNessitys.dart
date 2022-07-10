@@ -74,7 +74,7 @@ class _Addnecessity extends State<Addnecessity> {
     } else {
       return Scaffold(
         appBar: AppBar(
-          title: const Text("Add Home Spending"),
+          title: const Text("Add Necessity Spending"),
         ),
         body: Center(
           child: Column(
