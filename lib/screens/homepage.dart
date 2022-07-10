@@ -28,6 +28,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            const SizedBox(
+              height: 20,
+            ),
             CircleAvatar(
               radius: 100,
               backgroundColor: Colors.green,

@@ -35,7 +35,7 @@ class _SeeData extends State<SeeData> {
   ///split]
   int Income = -1;
   ///split
-  late int total;
+  int total = -1;
   getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     HomeBills = prefs.getInt('HomeBills') ?? 0;
@@ -139,7 +139,7 @@ class _SeeData extends State<SeeData> {
     if (Interest < 0) {
       Interest = 0;
     }
-    total = eatingOut + tech + furniture + Other + cheapStuff + wearables + HomeBills + SanitaryItems + ElecticalBill + GasBillHome + RepairsHome + TaxesHome + Food + Health + Car + Cloths + Taxes + Interest + Income;
+    total = eatingOut + tech + furniture + Other + cheapStuff + wearables + HomeBills + SanitaryItems + ElecticalBill + GasBillHome + RepairsHome + TaxesHome + Food + Health + Car + Cloths + Taxes + Interest;
     setState(() {});
   }
 
@@ -189,6 +189,7 @@ class _SeeData extends State<SeeData> {
                         {'domain': 'Total Necessary\$', 'measure': Food + Health + Car + Cloths + Taxes + Interest},
                         {'domain': 'Total House\$', 'measure': HomeBills + ElecticalBill + SanitaryItems + RepairsHome + GasBillHome + TaxesHome},
                         {'domain': 'Income', 'measure': Income},
+                        {'domain': 'Total', 'measure': total},
                       ],
                     },
                   ],
@@ -216,13 +217,14 @@ class _SeeData extends State<SeeData> {
                         {'domain': 'Total Necessary\$', 'measure': Food + Health + Car + Cloths + Taxes + Interest},
                         {'domain': 'Total House\$', 'measure': HomeBills + ElecticalBill + SanitaryItems + RepairsHome + GasBillHome + TaxesHome},
                         {'domain': 'Income', 'measure': Income},
+                        {'domain': 'Total', 'measure': total},
                       ],
                     },
                   ],
                   domainLabelPaddingToAxisLine: 16,
-                  axisLineColor: Colors.green,
+                  axisLineColor: Colors.blue,
                   measureLabelPaddingToAxisLine: 16,
-                  barColor: (barData, index, id) => Colors.green,
+                  barColor: (barData, index, id) => Colors.blue,
                   verticalDirection: false,
                 ),
               ),
@@ -309,9 +311,9 @@ class _SeeData extends State<SeeData> {
                     },
                   ],
                   domainLabelPaddingToAxisLine: 16,
-                  axisLineColor: Colors.green,
+                  axisLineColor: Colors.blue,
                   measureLabelPaddingToAxisLine: 16,
-                  barColor: (barData, index, id) => Colors.green,
+                  barColor: (barData, index, id) => Colors.blue,
                   verticalDirection: false,
                 ),
               ),
@@ -322,21 +324,215 @@ class _SeeData extends State<SeeData> {
                 aspectRatio: 16 / 9,
                 child: DChartPie(
                   data:  [
-                    {'domain': 'eating out\$', 'measure': eatingOut},
-                    {'domain': 'tech\$', 'measure': tech},
-                    {'domain': 'furniture\$', 'measure': furniture},
-                    {'domain': 'Other', 'measure': Other},
+                    {'domain': 'eating out \$', 'measure': eatingOut},
+                    {'domain': 'tech', 'measure': tech},
+                    {'domain': 'furniture \$', 'measure': furniture},
+                    {'domain': 'Other \$', 'measure': Other},
                     {'domain': 'cheapStuff', 'measure': cheapStuff},
                     {'domain': 'wearables', 'measure': wearables},
                   ],
                   fillColor: (pieData, index) {
                     switch (pieData['domain']) {
-                      case 'Total Fun \$':
-                        return Colors.orange;
-                      case 'Total House \$':
+                      case 'eating out \$':
+                        return Colors.pink;
+                      case 'furniture \$':
                         return Colors.blue;
-                      case 'Total Necessary \$':
+                      case 'Other \$':
                         return Colors.green;
+                      case 'cheapStuff':
+                        return Colors.red;
+                      case 'wearables':
+                        return Colors.yellow;
+                      default:
+                        return Colors.orange;
+                    }
+                  },
+                  pieLabel: (pieData, index) {
+                    return "${pieData['domain']}:\n${pieData['measure']}\$";
+                  },
+                  labelPosition: PieLabelPosition.outside,
+                ),
+              ),
+            ),
+            ListTile(
+              title: const Text('House Spending'),
+              tileColor: Colors.green[200],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: AspectRatio(
+                aspectRatio: 16 / 9,
+                child: DChartBar(
+                  data:  [
+                    {
+                      'id': 'Bar',
+                      'data': [
+                        {'domain': 'Home Bills', 'measure': HomeBills},
+                        {'domain': 'Sanitary Items', 'measure': SanitaryItems},
+                        {'domain': 'Gas Bill Home', 'measure': GasBillHome},
+                        {'domain': 'Repairs Home', 'measure': RepairsHome},
+                        {'domain': 'Electical Bill', 'measure': ElecticalBill},
+                        {'domain': 'TaxesHome', 'measure': TaxesHome},
+                      ],
+                    },
+                  ],
+                  domainLabelPaddingToAxisLine: 16,
+                  axisLineTick: 2,
+                  axisLinePointTick: 5,
+                  axisLinePointWidth: 2,
+                  axisLineColor: Colors.green,
+                  measureLabelPaddingToAxisLine: 16,
+                  barColor: (barData, index, id) => Colors.green,
+                  showBarValue: true,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: AspectRatio(
+                aspectRatio: 16 / 9,
+                child: DChartBar(
+                  data:  [
+                    {
+                      'id': 'Bar',
+                      'data': [
+                        {'domain': 'Home Bills', 'measure': HomeBills},
+                        {'domain': 'Sanitary Items', 'measure': SanitaryItems},
+                        {'domain': 'Gas Bill Home', 'measure': GasBillHome},
+                        {'domain': 'Repairs Home', 'measure': RepairsHome},
+                        {'domain': 'Electical Bill', 'measure': ElecticalBill},
+                        {'domain': 'TaxesHome', 'measure': TaxesHome},
+                      ],
+                    },
+                  ],
+                  domainLabelPaddingToAxisLine: 16,
+                  axisLineColor: Colors.blue,
+                  measureLabelPaddingToAxisLine: 16,
+                  barColor: (barData, index, id) => Colors.blue,
+                  verticalDirection: false,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: AspectRatio(
+                aspectRatio: 16 / 9,
+                child: DChartPie(
+                  data:  [
+                    {'domain': 'Home Bills', 'measure': HomeBills},
+                    {'domain': 'Sanitary Items', 'measure': SanitaryItems},
+                    {'domain': 'Gas Bill Home', 'measure': GasBillHome},
+                    {'domain': 'Repairs Home', 'measure': RepairsHome},
+                    {'domain': 'Electical Bill', 'measure': ElecticalBill},
+                    {'domain': 'TaxesHome', 'measure': TaxesHome},
+                  ],
+                  fillColor: (pieData, index) {
+                    switch (pieData['domain']) {
+                      case 'Home Bills':
+                        return Colors.pink;
+                      case 'Sanitary Items':
+                        return Colors.blue;
+                      case 'Gas Bill Home':
+                        return Colors.green;
+                      case 'Repairs Home':
+                        return Colors.red;
+                      case 'Electical Bill':
+                        return Colors.yellow;
+                      default:
+                        return Colors.orange;
+                    }
+                  },
+                  pieLabel: (pieData, index) {
+                    return "${pieData['domain']}:\n${pieData['measure']}\$";
+                  },
+                  labelPosition: PieLabelPosition.outside,
+                ),
+              ),
+            ),
+            ListTile(
+              title: const Text('Important Spending'),
+              tileColor: Colors.green[200],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: AspectRatio(
+                aspectRatio: 16 / 9,
+                child: DChartBar(
+                  data:  [
+                    {
+                      'id': 'Bar',
+                      'data': [
+                        {'domain': 'Food', 'measure': Food},
+                        {'domain': 'Health', 'measure': Health},
+                        {'domain': 'Car', 'measure': Car},
+                        {'domain': 'Cloths', 'measure': Cloths},
+                        {'domain': 'Taxes', 'measure': Taxes},
+                        {'domain': 'Interest', 'measure': Interest},
+                      ],
+                    },
+                  ],
+                  domainLabelPaddingToAxisLine: 16,
+                  axisLineTick: 2,
+                  axisLinePointTick: 5,
+                  axisLinePointWidth: 2,
+                  axisLineColor: Colors.green,
+                  measureLabelPaddingToAxisLine: 16,
+                  barColor: (barData, index, id) => Colors.green,
+                  showBarValue: true,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: AspectRatio(
+                aspectRatio: 16 / 9,
+                child: DChartBar(
+                  data:  [
+                    {
+                      'id': 'Bar',
+                      'data': [
+                        {'domain': 'Food', 'measure': Food},
+                        {'domain': 'Health', 'measure': Health},
+                        {'domain': 'Car', 'measure': Car},
+                        {'domain': 'Cloths', 'measure': Cloths},
+                        {'domain': 'Taxes', 'measure': Taxes},
+                        {'domain': 'Interest', 'measure': Interest},
+                      ],
+                    },
+                  ],
+                  domainLabelPaddingToAxisLine: 16,
+                  axisLineColor: Colors.blue,
+                  measureLabelPaddingToAxisLine: 16,
+                  barColor: (barData, index, id) => Colors.blue,
+                  verticalDirection: false,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: AspectRatio(
+                aspectRatio: 16 / 9,
+                child: DChartPie(
+                  data:  [
+                    {'domain': 'Food', 'measure': Food},
+                    {'domain': 'Health', 'measure': Health},
+                    {'domain': 'Car', 'measure': Car},
+                    {'domain': 'Cloths', 'measure': Cloths},
+                    {'domain': 'Taxes', 'measure': Taxes},
+                    {'domain': 'Interest', 'measure': Interest},
+                  ],
+                  fillColor: (pieData, index) {
+                    switch (pieData['domain']) {
+                      case 'Food':
+                        return Colors.pink;
+                      case 'Health':
+                        return Colors.blue;
+                      case 'Car':
+                        return Colors.green;
+                      case 'Cloths':
+                        return Colors.red;
+                      case 'Taxes':
+                        return Colors.yellow;
                       default:
                         return Colors.orange;
                     }
