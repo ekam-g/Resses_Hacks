@@ -1,4 +1,4 @@
-# teckweek
+# Recess Hacks
 
 A new Flutter project.
 
